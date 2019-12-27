@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Lab6</title>
+<!--	<script type="text/javascript" src="public/js/Lab6.js"></script>-->
+</head>
+<body>
+      <script>
+          function calculator(obj) {
+	data = obj.getElementsByTagName('input'); 
+	for(item of data){
+		item.addEventListener('click', e => bind(e, obj, data));
+	}
+}
+
+function getItemsCost(data){
+	
+	visited = new Array();
+	total_cost = 0;
+	for(let item of data){
+		if(item.type == 'radio' && !item.checked){continue;} 
+		else if(item.type == 'checkbox' && !item.checked){continue;} 
+		else {
+			
+			visited.push(item.name);
+			total_cost += Number(item.value);
+		}
+	}
+	return(total_cost);
+}
+
+function bind(event, obj, data){
+	
+	obj.result.value = getItemsCost(data)
+}
+    </script>
+	<div align="center">
+		<form name='study'>
+			<p>Написати сценарій обробки анкети слухача курсів. Користувач може обрати із списку курсів конкретний курс, його тривалість, мову роботи з викладачем, форму звітності. Залежно від цих параметрів визначається вартість окремого курсу і вартість всього навчання. </p>
+			<h1><center>English lessons</center></h3>
+			<h3>Engish level</h2>
+			<p>A1<input type="radio" name="level" value="30">A2<input type="radio" name="level" value="50">
+			   B1<input type="radio" name="level" value="70">B2<input type="radio" name="level" value="100"></p>
+			<h3>Types of training</h3>
+			<p>
+				With teacher <input type="Checkbox" name="training1" value="50"> Lesson with native english speakers<input type="Checkbox" name="training2" value="80">
+			</p>
+			<h3>Lentgh</h3>
+			<p>
+				6 month <input type="radio" name="period" value="50"> 1 year<input type="radio" name="period" value="85">
+			</p>
+			<h3>Materials</h3>
+			<p>
+				E-Mail <input type="Checkbox" name="materials1" value="30">Books<input type="Checkbox" name="materials2" value="60">
+			</p>
+
+			<h3>Total cost: <output name='result'>0</output>$</h3>
+			<script type="text/javascript">calculator(study)</script>
+		</form>
+	</div>
+  
+</body>
+</html>
